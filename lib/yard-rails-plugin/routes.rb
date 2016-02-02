@@ -34,7 +34,7 @@ module YARD
               else
                 destination = "{#{r[:controller]} #{r[:controller]}}##{r[:action]}  #{r[:constraints]}"
               end
-              endpoint = r[:path].gsub(/(:|\*)\w+/) { |m| "<span style='font-family: monospace; color: green'>#{m}</span>"}
+              endpoint = r[:path].to_s.gsub(/(:|\*)\w+/) { |m| "<span style='font-family: monospace; color: green'>#{m}</span>"}
               f.puts "<tr class='#{odd_or_even}'><td>#{r[:name]}</td><td>#{r[:verb]}</td><td>#{endpoint}</td><td>#{destination}</td></tr>"
               i += 1
             end
