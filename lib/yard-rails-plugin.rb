@@ -18,5 +18,4 @@ YARD::Parser::SourceParser.after_parse_list do
   load_rails_environment 'development'
   routes = YARD::Rails::Plugin::Routes.new
   routes.generate_routes_description_file 'tmp/Routes.md'
-  routes.enrich_controllers
 end
