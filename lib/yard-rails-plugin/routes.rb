@@ -68,7 +68,7 @@ module YARD
 
         def generate_routes_description_file(filename)
           File.open(File.join(Dir.pwd, filename), 'w') do |f|
-            f.puts "# Routes\n"
+            f.puts "# Routes\n\n"
             f.puts @inspector.format(KramdownTableFormatter.new)
           end
         end
