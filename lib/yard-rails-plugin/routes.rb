@@ -42,14 +42,14 @@ module YARD
               name_width, verb_width, path_width = widths(routes).zip(header_lengths).map(&:max)
     
               routes.map do |r|
-                "#{r[:name].rjust(name_width)} | #{r[:verb].ljust(verb_width)} | #{r[:path].ljust(path_width)} | #{r[:reqs]}"
+                "| #{r[:name].rjust(name_width)} | #{r[:verb].ljust(verb_width)} | #{r[:path].ljust(path_width)} | #{r[:reqs]}"
               end
             end
     
             def draw_header(routes)
               name_width, verb_width, path_width = widths(routes)
     
-              "#{"Prefix".rjust(name_width)} | #{"Verb".ljust(verb_width)} | #{"URI Pattern".ljust(path_width)} | Controller#Action"
+              "|---\n| #{"Prefix".rjust(name_width)} | #{"Verb".ljust(verb_width)} | #{"URI Pattern".ljust(path_width)} | Controller#Action\n|-|-|-|-"
             end
     
             def widths(routes)
