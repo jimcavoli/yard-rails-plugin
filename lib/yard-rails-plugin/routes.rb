@@ -61,7 +61,7 @@ module YARD
         
         def initialize
           puts '[rails-plugin] Analyzing Routes...'
-          all_routes = Rails.application.routes.routes
+          all_routes = ::Rails.application.routes.routes
           require 'action_dispatch/routing/inspector'
           @inspector = ActionDispatch::Routing::RoutesInspector.new(all_routes)
         end
