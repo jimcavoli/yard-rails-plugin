@@ -72,30 +72,6 @@ module YARD
             f.puts @inspector.format(KramdownTableFormatter.new)
           end
         end
-
-        def enrich_controllers
-          ::Rails.application.routes.routes.collect do |route|            
-            reqs = route.requirements.dup
-            rack_app =  route.app.class.name.to_s =~ /^ActionDispatch::Routing/ ? nil : route.app.inspect
-            constraints = reqs.except(:controller, :action).empty? ? '' : reqs.except(:controller, :action).inspect
-            if reqs[:controller]
-              controller = reqs[:controller] + '_controller'
-              controller = (controller.split('_').map{ |s| s[0].upcase + s[1..-1] }).join('')
-              controller = (controller.split('/').map{ |s| s[0].upcase + s[1..-1] }).join('::')
-            else
-              controller = ''
-            end
-            { name: route.name.to_s, verb: route.verb.to_s, path: route.path,
-              controller: controller , action: reqs[:action], rack_app: rack_app, constraints: constraints}
-          end.each do |r|
-            if r[:controller] && node = YARD::Registry.resolve(nil, r[:controller], true)
-              (node[:routes] ||= []) << r
-            end
-            if r[:controller] && r[:action] && node = YARD::Registry.resolve(nil, r[:controller]+'#'+r[:action], true)
-              (node[:routes] ||= []) << r
-            end
-          end
-        end
       end
     end
   end
